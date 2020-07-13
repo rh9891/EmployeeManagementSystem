@@ -97,9 +97,11 @@ function start() {
 };
 
 function viewAll() {
-  var query = "SELECT employee.id, employee.first_name, employee.last_name, employee.role_id FROM employee role.title FROM";
+  var query = "SELECT employee.id, employee.first_name, employee.last_name, CONCAT(role.title)job_title, CONCAT(department.name)department, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id;";
   connection.query(query, function(err, results) {
     if (err) throw err;
+    console.log("**************************************************************************************************");
+    console.table(results);
     start();
   });
 };
