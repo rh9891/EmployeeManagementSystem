@@ -33,7 +33,7 @@ VALUES ("Charles", "Xavier", 1, NULL),
 ("Warren", "Worthington III", 9, 4),
 ("Bobby", "Drake", 12, 3),
 ("Piotr", "Rasputin", 11, 3),
-("Kevin", "Sydney", 13, 3),;
+("Kevin", "Sydney", 13, 3);
 
 -- Employee Positions
 -- Charles Xavier [CEO]
