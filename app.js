@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-​
+
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
@@ -8,12 +8,38 @@ var connection = mysql.createConnection({
   password: "uR#%q@g3WCm!",
   database: "company_db"
 });
-​
+
 connection.connect(function(err) {
     if (err) throw err;
+    console.log("**************************************************************************************************");
+    console.log("");
+    console.log("");
+    console.log("         ███████╗███╗░░░███╗██████╗░██╗░░░░░░█████╗░██╗░░░██╗███████╗███████╗");
+    console.log("         ██╔════╝████╗░████║██╔══██╗██║░░░░░██╔══██╗╚██╗░██╔╝██╔════╝██╔════╝");
+    console.log("         █████╗░░██╔████╔██║██████╔╝██║░░░░░██║░░██║░╚████╔╝░█████╗░░█████╗░░");
+    console.log("         █████╗░░██╔████╔██║██████╔╝██║░░░░░██║░░██║░╚████╔╝░█████╗░░█████╗░░");
+    console.log("         ██╔══╝░░██║╚██╔╝██║██╔═══╝░██║░░░░░██║░░██║░░╚██╔╝░░██╔══╝░░██╔══╝░░");
+    console.log("         ███████╗██║░╚═╝░██║██║░░░░░███████╗╚█████╔╝░░░██║░░░███████╗███████╗");
+    console.log("         ╚══════╝╚═╝░░░░░╚═╝╚═╝░░░░░╚══════╝░╚════╝░░░░╚═╝░░░╚══════╝╚══════╝");
+    console.log("███╗░░░███╗░█████╗░███╗░░██╗░█████╗░░██████╗░███████╗███╗░░░███╗███████╗███╗░░██╗████████╗");
+    console.log("████╗░████║██╔══██╗████╗░██║██╔══██╗██╔════╝░██╔════╝████╗░████║██╔════╝████╗░██║╚══██╔══╝");
+    console.log("██╔████╔██║███████║██╔██╗██║███████║██║░░██╗░█████╗░░██╔████╔██║█████╗░░██╔██╗██║░░░██║░░░");
+    console.log("██║╚██╔╝██║██╔══██║██║╚████║██╔══██║██║░░╚██╗██╔══╝░░██║╚██╔╝██║██╔══╝░░██║╚████║░░░██║░░░");
+    console.log("██║░╚═╝░██║██║░░██║██║░╚███║██║░░██║╚██████╔╝███████╗██║░╚═╝░██║███████╗██║░╚███║░░░██║░░░");
+    console.log("╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░╚═════╝░╚══════╝╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░");
+    console.log("               ░██████╗██╗░░░██╗░██████╗████████╗███████╗███╗░░░███╗");
+    console.log("               ██╔════╝╚██╗░██╔╝██╔════╝╚══██╔══╝██╔════╝████╗░████║");
+    console.log("               ╚█████╗░░╚████╔╝░╚█████╗░░░░██║░░░█████╗░░██╔████╔██║");
+    console.log("               ░╚═══██╗░░╚██╔╝░░░╚═══██╗░░░██║░░░██╔══╝░░██║╚██╔╝██║");
+    console.log("               ██████╔╝░░░██║░░░██████╔╝░░░██║░░░███████╗██║░╚═╝░██║");
+    console.log("");
+    console.log("");
+    console.log("**************************************************************************************************");
+    console.log("");
+    console.log("");
     start();
 });
-​
+
 function start() {
     inquirer.prompt({
         name: "action",
@@ -29,25 +55,24 @@ function start() {
             "Update employee manager",
             "Exit"
         ]
-    })
-    .then(function(answer) {
-        switch (answer.action) {
+    }).then(function(answer) {
+            switch (answer.action) {
             case "View all employees":
             viewAll();
             break;
-​
+
             case "View all employees by department":
             viewAllByDept();
             break;
-​
+
             case "View all employees by manager":
             viewAllByManager();
             break;
-​
+
             case "Add employee":
             addEmployee();
             break;
-​
+
             case "Remove employee":
             removeEmployee();
             break;
@@ -63,7 +88,7 @@ function start() {
             case "Update employee manager":
             updateEmployeeManager();
             break;
-​
+            
             case "Exit":
             connection.end();
             break;
@@ -72,9 +97,9 @@ function start() {
 };
 
 function viewAll() {
-  var query = "SELECT employee.id, employee.first_name, employee.last_name, employee.role_id FROM employee";
+  var query = "SELECT employee.id, employee.first_name, employee.last_name, employee.role_id FROM employee role.title FROM";
   connection.query(query, function(err, results) {
     if (err) throw err;
- start();
+    start();
   });
 };
