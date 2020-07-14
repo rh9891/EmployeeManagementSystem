@@ -37,7 +37,8 @@ CREATE TABLE employee (
 -- ON employee.role_id = role.id
 -- LEFT JOIN department
 -- ON role.department_id = department.id
--- LEFT JOIN employee m ON m.id = employee.manager_id;
+-- LEFT JOIN employee m 
+-- ON m.id = employee.manager_id;
 
 -- Method to view all employees by their respective managers
 -- SELECT CONCAT(employee.first_name, " " ,employee.last_name)employee, CONCAT(m.first_name, " " ,m.last_name)manager
@@ -46,7 +47,8 @@ CREATE TABLE employee (
 -- ON employee.role_id = role.id
 -- LEFT JOIN department
 -- ON role.department_id = department.id
--- LEFT JOIN employee m ON m.id = employee.manager_id
+-- LEFT JOIN employee m 
+-- ON m.id = employee.manager_id
 -- ORDER BY manager;
 
 -- Method to view all employees by their respective departments
@@ -56,5 +58,6 @@ CREATE TABLE employee (
 -- ON employee.role_id = role.id
 -- LEFT JOIN department
 -- ON role.department_id = department.id
--- LEFT JOIN employee m ON m.id = employee.manager_id
+-- LEFT JOIN employee m 
+-- ON m.id = employee.manager_id
 -- ORDER BY department;
