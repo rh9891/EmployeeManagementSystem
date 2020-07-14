@@ -6,7 +6,7 @@
 *  [Description](#description)
 *  [User Story](#user-story)
 *  [Features of the Application](#features-of-the-application)
-*  [Preview of Employee Management System](#preview-of-the-employee-management-system)
+*  [Preview of the Employee Management System](#preview-of-the-employee-management-system)
 *  [Links](#links)
 *  [Installation](#installation)
 *  [Usage](#usage)
@@ -27,24 +27,44 @@ SO THAT I can organize and plan my business.
 
 ## Features of the Application
 ~~~
-GIVEN   
-WHEN   
-THEN 
+GIVEN an application that allows the user to view and manage the departments, roles, and employees in their company  
+WHEN I interact with the command line interface,
+THEN I am given options to view my employees (and details regarding their employment (roles, salaries, managers, departments, and id number)), add or remove an employee to my company, add a new department to my company, and update details of an existing employee (the employee's name, manager, or job title).  
 ~~~
 
 ## Preview of the Employee Management System
 
-![Preview](Assets/images/titleCardPreview.png)
+![Title Card Preview](assets/images/titleCardPreview.png)
 
 The following animation demonstrates the application functionality:
 
-![Employee Management System]()
+![Employee Management System](https://github.com/rh9891/EmployeeManagementSystem/blob/master/assets/images/employmentManagementPreview.gif)
 
-The following image demonstrates the application functionality:
+The following image demonstrates the application's capability to view all of its current employees and details regarding their employment:
 
-![Preview]()
+![View All Employees Preview](assets/images/viewAllEmployeesPreview.png)
 
-![Preview]()
+The following image is a diagram of the schema that demonstrates the variables for each table, including their indexes, constraints, and foreign keys:
+
+![Diagram of the company_db Schema](assets/images/diagramOfSchemaPreview.png)
+
+The following image demonstrates the application's capability to view all of its current employees by order of their managers:
+
+![View All Employees By Manager Preview](assets/images/viewEmployeesByManagerPreview.png)
+
+The following image demonstrates the application's capability to view all of its current employees through departmental grouping:
+
+![View All Employees By Department Preview](assets/images/viewAllByDeptPreview.png)
+
+The following images demonstrate the application's capability of adding a new employee to the current employee database.
+
+In this first image, the user is prompted by the command line interface to input responses about the new employee, such as their first name, last name, job title, etc.:
+
+![Add New Employee Preview](assets/images/addEmployeePreview.png)
+
+The second image demonstrate the application saving the details of the new employee into the current employee database. The id number is automatically generated for the new employee, but the new employee is without a manager as it has yet to be assigned.:
+
+![View New Employee Preview](assets/images/viewNewEmployeePreview.png)
 
 ## Links
 
@@ -65,11 +85,15 @@ npm install inquirer
 npm install mysql
 ~~~
 
+~~~
+npm install console.table
+~~~
+
 ## Usage
 
 An example of usage when first launching the application to access it from the command line:
 ~~~
-node server.js
+node app.js
 ~~~
 
 ## License
