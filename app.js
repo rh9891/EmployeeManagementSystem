@@ -54,7 +54,7 @@ function start() {
             "Add department",
             // "Remove employee",
             // "Update employee name",
-            "Update employee role",
+            // "Update employee role",
             // "Update employee manager",
             "Exit"
         ]
@@ -92,9 +92,9 @@ function start() {
             // updateEmployee();
             // break;
 
-            case "Update employee role":
-            updateEmployeeRole();
-            break;
+            // case "Update employee role":
+            // updateEmployeeRole();
+            // break;
 
             // case "Update employee manager":
             // updateEmployeeManager();
