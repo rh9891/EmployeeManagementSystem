@@ -97,7 +97,27 @@ function start() {
 };
 
 function viewAll() {
-  var query = "SELECT employee.id, employee.first_name, employee.last_name, CONCAT(role.title)job_title, CONCAT(department.name)department, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id;";
+  var query = "SELECT employee.id, employee.first_name, employee.last_name, CONCAT(role.title)job_title, CONCAT(department.name)department, role.salary, CONCAT(m.first_name, ' ' ,m.last_name)manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee m ON m.id = employee.manager_id";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    console.log("**************************************************************************************************");
+    console.table(results);
+    start();
+  });
+};
+
+function viewAllByDept() {
+  var query = "SELECT CONCAT(employee.first_name, ' ' ,employee.last_name)employee, CONCAT(department.name)department FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee m ON m.id = employee.manager_id ORDER BY department";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    console.log("**************************************************************************************************");
+    console.table(results);
+    start();
+  });
+};
+
+function viewAllByManager() {
+  var query = "SELECT CONCAT(employee.first_name, ' ' ,employee.last_name)employee, CONCAT(m.first_name, ' ' ,m.last_name)manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee m ON m.id = employee.manager_id ORDER BY manager";
   connection.query(query, function(err, results) {
     if (err) throw err;
     console.log("**************************************************************************************************");
