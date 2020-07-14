@@ -189,22 +189,32 @@ function addEmployeeRole() {
           name: "new_employee_role",
           type: "input",
           message: "What is the employee role that you would like to add?"
+        },
+        {
+          name: "new_salary",
+          type: "input",
+          message: "What is the salary for this role?"
+        },
+        {
+          name: "new_department_id",
+          type: "input",
+          message: "What is the department ID for this role?"
         }
-      ]).then(function(answer) {
-          connection.query(
-          "INSERT INTO role SET ?",
-          {
-            title: answer.new_employee_role
-          },
-          function(err) {
-            if (err) throw err;
-            console.log("");
-            console.log("You have successfully created an employee role.");
-            console.log("");
-            start();
-          }
-        );
-      });
+      ]).then(({new_employee_role, new_salary, new_department_id}) => {
+            connection.query("INSERT INTO role SET ?",
+            {
+              title: new_employee_role,
+              salary: new_salary,
+              department_id: new_department_id
+            },
+            function(err) {
+              if (err) throw err;
+              console.log("");
+              console.log("You have successfully created an employee role.");
+              console.log("");
+              start();
+            })
+      })
 };
 
 function addDepartment() {
@@ -224,7 +234,7 @@ function addDepartment() {
           function(err) {
             if (err) throw err;
             console.log("");
-            console.log("You have successfully created an employee role.");
+            console.log("You have successfully created a new department.");
             console.log("");
             start();
           }
