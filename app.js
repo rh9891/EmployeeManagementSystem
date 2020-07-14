@@ -49,7 +49,7 @@ function start() {
             "View all employees",
             "View all employees by department",
             "View all employees by manager",
-            // "View all departments",
+            "View all departments",
             // "View all employee salaries",
             "Add employee",
             // "Remove employee",
@@ -76,9 +76,9 @@ function start() {
             viewAllByManager();
             break;
 
-            // case "View all departments":
-            // viewAllDepartments();
-            // break;
+            case "View all departments":
+            viewAllDepartments();
+            break;
 
             // case "View all employee salaries":
             // viewAllEmployeeSalaries();
@@ -322,3 +322,13 @@ function updateEmployeeRole() {
     })
   })
 };
+
+function viewAllDepartments() {
+  var query = "SELECT id, CONCAT(name)department FROM department";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    console.log("**************************************************************************************************");
+    console.table(results);
+    start();
+  });
+}
