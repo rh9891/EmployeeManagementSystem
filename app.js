@@ -50,9 +50,12 @@ function start() {
             "View all employees by department",
             "View all employees by manager",
             "Add employee",
-            "Remove employee",
+            "Add employee role",
+            "Add department",
+            // "Remove employee",
+            // "Update employee name",
             "Update employee role",
-            "Update employee manager",
+            // "Update employee manager",
             "Exit"
         ]
     }).then(function(answer) {
@@ -85,7 +88,7 @@ function start() {
             // removeEmployee();
             // break;
 
-            // case "Update employee":
+            // case "Update employee name":
             // updateEmployee();
             // break;
 
