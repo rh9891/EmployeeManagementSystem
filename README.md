@@ -74,10 +74,6 @@ The second image demonstrate the application saving the details of the new emplo
 
 The application requires the following dependencies and/or package managers:
 ~~~
-npm install
-~~~
-
-~~~
 npm install inquirer
 ~~~
 
