@@ -16,7 +16,9 @@
 
 ## Description
 
-**C**ontent **M**anagement **S**ystems are interfaces that make it easy for non-developers to view and interact with information stored in databases. The Employee Management System builds a solution for managing a company's employees using node, inquirer, and MySQL.
+**C**ontent **M**anagement **S**ystems are user-friendly interfaces that make it easy for non-developers to view and interact with information stored in databases. Content Management Systems lets its users create, edit, and publish information in a dynamic fashion. It allows users without any coding knowledge or coding experience to modify and edit content.
+
+The Employee Management System is a command-line application builds a solution for managing a company's employees using node, inquirer, and MySQL. The user us able  lets its users create, edit, archive, collaborate, report, publish, distribute and inform. Its Graphic User Interface (GUI) makes interacting with a website's database user friendly.
 
 ## User Story
 ~~~

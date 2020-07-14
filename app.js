@@ -49,12 +49,16 @@ function start() {
             "View all employees",
             "View all employees by department",
             "View all employees by manager",
+            // "View all departments",
+            // "View all employee salaries",
             "Add employee",
-            "Add employee role",
-            "Add department",
             // "Remove employee",
+            "Add employee role",
+            // "Remove employee role",
+            "Add department",
+            // "Remove department",
             // "Update employee name",
-            // "Update employee role",
+            "Update employee role",
             // "Update employee manager",
             "Exit"
         ]
@@ -72,29 +76,45 @@ function start() {
             viewAllByManager();
             break;
 
+            // case "View all departments":
+            // viewAllDepartments();
+            // break;
+
+            // case "View all employee salaries":
+            // viewAllEmployeeSalaries();
+            // break;
+
             case "Add employee":
             addEmployee();
-            break;
-
-            case "Add employee role":
-            addEmployeeRole();
-            break;
-
-            case "Add department":
-            addDepartment();
             break;
 
             // case "Remove employee":
             // removeEmployee();
             // break;
 
+            case "Add employee role":
+            addEmployeeRole();
+            break;
+
+            // case "Remove employee role":
+            // removeEmployeeRole();
+            // break;
+
+            case "Add department":
+            addDepartment();
+            break;
+
+            // case "Remove department":
+            // removeDepartment();
+            // break;
+
             // case "Update employee name":
             // updateEmployee();
             // break;
 
-            // case "Update employee role":
-            // updateEmployeeRole();
-            // break;
+            case "Update employee role":
+            updateEmployeeRole();
+            break;
 
             // case "Update employee manager":
             // updateEmployeeManager();
@@ -239,46 +259,66 @@ function addDepartment() {
     });
 };
 
-// function updateEmployeeRole() {
-//   var query = "SELECT CONCAT(employee.id)id, first_name, last_name, role.title FROM employee LEFT JOIN role ON employee.role_id = role.id"
-//   connection.query(query, function(err, results) {
-//     if(err) throw err;
-//     console.log("");
-//     console.table(results);
-//     console.log("");
-//     console.log("**************************************************************************************************");
-//     console.log("");
-//     inquirer.prompt([
-//       {
-//         name: "employee_id",
-//         type: "rawlist",
-//         choices: () => {
-//           var idArray = [];
-//           for (var i = 0; i < results.length; i++) {
-//             idArray.push(results[i].employee.id);
-//           };
-//           return idArray;
-//         },
-//         message: "What is the ID of the employee whose role you would like to update? ",
-//       },
-//       {
-//         name: "update_role",
-//         type: "rawlist",
-//         message: "What is the employee's new role? ",
-//         choices: results.map(role => role.title)
-//       }
-//     ]).then(({employee_id, update_role}) => {
-//       connection.query("UPDATE employee SET ? WHERE employee.id = ${employee.id}", 
-//       {
-//         title: update_role
-//       },
-//       function(err) {
-//           if (err) throw err
-//           console.log("");
-//           console.log("You have successfully updated the employee's role.");
-//           console.log("");
-//           start()
-//       })
-//     })
-//   })
-// }
+function updateEmployeeRole() {
+  var query = "SELECT last_name FROM employee"
+  connection.query(query, function(err, results) {
+    if(err) throw err;
+    inquirer.prompt([
+      {
+        name: "pick_employee",
+        type: "rawlist",
+        choices: () => {
+          var employeeArray = [];
+          for (var i = 0; i < results.length; i++) {
+            employeeArray.push(results[i].last_name);
+          };
+          return employeeArray;
+        },
+        message: "What is the last name of the employee whose role you would like to update? ",
+      }
+    ]).then(chosen_employee => {
+      connection.query("SELECT * FROM role",
+        function(err, results) {
+            if (err) throw err;
+            inquirer.prompt([
+              {
+                name: "updated_role",
+                type: "rawlist",
+                choices: () => {
+                  var roleArray = [];
+                  for (var i = 0; i < results.length; i++) {
+                    roleArray.push(results[i].title);
+                  };
+                  return roleArray;
+                },
+                message: "What would you like their new job title to be?",
+              }
+        ]).then(response => {
+          connection.query("SELECT id FROM role WHERE ?",
+          {
+            title: response.updated_role
+          },
+          function(err, results) {
+                if (err) throw err;
+                connection.query("UPDATE employee SET ? WHERE ?",
+                [ 
+                  {
+                    role_id: results[0].id
+                  },
+                  {
+                    last_name: chosen_employee.pick_employee
+                  },
+                ],
+                function(err, results) {
+                  if (err) throw err;
+                  console.log("");
+                  console.log("You have successfully updated the employee's role.");
+                  console.log("");
+                  start()
+                })
+          })
+        })
+      })
+    })
+  })
+};
