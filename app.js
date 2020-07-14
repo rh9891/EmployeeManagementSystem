@@ -1,3 +1,5 @@
+require('events').EventEmitter.defaultMaxListeners = 15;
+
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
@@ -82,7 +84,7 @@ function start() {
             break;
 
             case "Update employee role":
-            updateEmployeeRole();
+            updateemployee_role();
             break;
 
             case "Update employee manager":
@@ -123,5 +125,52 @@ function viewAllByManager() {
     console.log("**************************************************************************************************");
     console.table(results);
     start();
+  });
+};
+
+function addEmployee() {
+  var query = "SELECT * FROM role"
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    inquirer
+      .prompt([
+        {
+          name: "first_name",
+          type: "input",
+          message: "What is the employee's first name?"
+        },
+        {
+          name: "last_name",
+          type: "input",
+          message: "What is the employee's last name?"
+        },
+        {
+          name: "employee_role",
+          type: "rawlist",
+          message: "What is the employee's role?",
+          choices: results.map(role => role.title)
+        }
+      ]).then(({first_name, last_name, employee_role}) => {
+        var roleID;
+        results.map(get => {
+          if(get.title === employee_role) {
+            roleID = get.id;
+            connection.query('INSERT INTO employee SET ?', {
+              first_name: first_name,
+              last_name: last_name,
+              role_id: roleID
+            },
+            console.log("You have successfully created an employee.")
+          )};
+          connection.query("SELECT employee.id, employee.first_name, employee.last_name, CONCAT(role.title)job_title, CONCAT(department.name)department, role.salary, CONCAT(m.first_name, ' ' ,m.last_name)manager FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee m ON m.id = employee.manager_id", function(err, result) {
+            if(err) throw err;
+            const emitter = new EventEmitter();
+            emitter.setMaxListeners(0);
+            console.log("**************************************************************************************************");
+            console.table(result);
+            start();
+          });
+        });
+      });
   });
 };
