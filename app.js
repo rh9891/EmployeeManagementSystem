@@ -178,3 +178,53 @@ function addEmployee() {
       });
   });
 };
+
+function addEmployeeRole() {
+  inquirer
+      .prompt([
+        {
+          name: "new_employee_role",
+          type: "input",
+          message: "What is the employee role that you would like to add?"
+        }
+      ]).then(function(answer) {
+          connection.query(
+          "INSERT INTO role SET ?",
+          {
+            title: answer.new_employee_role
+          },
+          function(err) {
+            if (err) throw err;
+            console.log("");
+            console.log("You have successfully created an employee role.");
+            console.log("");
+            start();
+          }
+        );
+      });
+};
+
+function addDepartment() {
+  inquirer
+      .prompt([
+        {
+          name: "new_department",
+          type: "input",
+          message: "What is the name of the department that you would like to add?"
+        },
+      ]).then(function(answer) {
+          connection.query(
+          "INSERT INTO department SET ?",
+          {
+            name: answer.new_department
+          },
+          function(err) {
+            if (err) throw err;
+            console.log("");
+            console.log("You have successfully created an employee role.");
+            console.log("");
+            start();
+          }
+        );
+      });
+};
