@@ -70,19 +70,19 @@ How do you deliver this? Here are some guidelines:
 
 ### Hints
 
-* You may wish to include a `seed.sql` file to pre-populate your database. This will make development of individual features much easier.
+You may wish to include a `seed.sql` file to pre-populate your database. This will make development of individual features much easier.
 
-* Focus on getting the basic functionality completed before working on more advanced features.
+Focus on getting the basic functionality completed before working on more advanced features.
 
-* Review the week's activities for a refresher on MySQL.
+Review the week's activities for a refresher on MySQL.
 
-* Check out [SQL Bolt](https://sqlbolt.com/) for some extra MySQL help.
+Check out [SQL Bolt](https://sqlbolt.com/) for some extra MySQL help.
 
 ## Minimum Requirements
 
-* Functional application.
+Functional application.
 
-* GitHub repository with a unique name and a README describing the project.
+GitHub repository with a unique name and a README describing the project.
 
 * The command-line application should allow users to:
 
@@ -98,7 +98,7 @@ How do you deliver this? Here are some guidelines:
 
   * Update employee managers
 
-  * View employees by manager
+  View employees by manager
 
   * Delete departments, roles, and employees
 
