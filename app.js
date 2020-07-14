@@ -56,7 +56,7 @@ function start() {
             "Add employee role",
             // "Remove employee role",
             "Add department",
-            // "Remove department",
+            "Delete department",
             // "Update employee name",
             "Update employee role",
             // "Update employee manager",
@@ -104,9 +104,9 @@ function start() {
             addDepartment();
             break;
 
-            // case "Remove department":
-            // removeDepartment();
-            // break;
+            case "Delete department":
+            deleteDepartment();
+            break;
 
             // case "Update employee name":
             // updateEmployee();
@@ -331,4 +331,36 @@ function viewAllDepartments() {
     console.table(results);
     start();
   });
-}
+};
+
+function deleteDepartment() {
+  var query = "SELECT * FROM department";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    inquirer.prompt([
+      {
+        name: "department_name",
+        type: "rawlist",
+        choices: () => {
+          var departmentArray = [];
+          for (var i = 0; i < results.length; i++) {
+            departmentArray.push(results[i].name);
+          };
+          return departmentArray;
+        },
+        message: "What is the name of the department that you would like to delete?",
+      }
+    ]).then(chosen_department => {
+      connection.query("DELETE FROM department WHERE ?",
+      {
+        name: chosen_department.department_name
+      },
+        function(err, results) {
+            if (err) throw err;
+            console.log("");
+            console.log("You have successfully deleted the department.");
+            console.log("");
+            start();
+        }
+    )})
+})};
