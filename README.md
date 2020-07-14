@@ -6,7 +6,7 @@
 *  [Description](#description)
 *  [User Story](#user-story)
 *  [Features of the Application](#features-of-the-application)
-*  [Preview of Employee Management System](#preview-of-employee-management-system)
+*  [Preview of Employee Management System](#preview-of-the-employee-management-system)
 *  [Links](#links)
 *  [Installation](#installation)
 *  [Usage](#usage)
@@ -34,9 +34,7 @@ THEN
 
 ## Preview of the Employee Management System
 
-
-
-![Preview]()
+![Preview](Assets/images/titleCardPreview.png)
 
 The following animation demonstrates the application functionality:
 
