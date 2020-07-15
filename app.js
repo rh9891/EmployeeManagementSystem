@@ -53,7 +53,7 @@ function start() {
             "View all employee roles",
             // "View all employee salaries",
             "Add employee",
-            // "Remove employee",
+            "Delete employee",
             "Add employee role",
             "Delete employee role",
             "Add department",
@@ -93,9 +93,9 @@ function start() {
             addEmployee();
             break;
 
-            // case "Remove employee":
-            // removeEmployee();
-            // break;
+            case "Delete employee":
+            deleteEmployee();
+            break;
 
             case "Add employee role":
             addEmployeeRole();
@@ -406,6 +406,38 @@ function deleteEmployeeRole() {
             if (err) throw err;
             console.log("");
             console.log("You have successfully deleted the employee role.");
+            console.log("");
+            start();
+        }
+    )})
+})};
+
+function deleteEmployee() {
+  var query = "SELECT * FROM employee";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    inquirer.prompt([
+      {
+        name: "employee_last_name",
+        type: "rawlist",
+        choices: () => {
+          var employeeArray = [];
+          for (var i = 0; i < results.length; i++) {
+            employeeArray.push(results[i].last_name);
+          };
+          return employeeArray;
+        },
+        message: "What is the last name of the employee that you would like to delete?",
+      }
+    ]).then(chosen_employee => {
+      connection.query("DELETE FROM employee WHERE ?",
+      {
+        last_name: chosen_employee.employee_last_name
+      },
+        function(err, results) {
+            if (err) throw err;
+            console.log("");
+            console.log("You have successfully deleted the employee.");
             console.log("");
             start();
         }
