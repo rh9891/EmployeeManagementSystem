@@ -52,6 +52,7 @@ function start() {
             "View all departments",
             "View all employee roles",
             "View all employee salaries",
+            "View the departmental budget",
             "Add employee",
             "Delete employee",
             "Add employee role",
@@ -87,6 +88,10 @@ function start() {
 
             case "View all employee salaries":
             viewAllEmployeeSalaries();
+            break;
+
+            case "View the departmental budget":
+            viewDepartmentalBudget();          
             break;
 
             case "Add employee":
@@ -454,3 +459,50 @@ function viewAllEmployeeSalaries() {
     start();
   });
 };
+
+function viewAllEmployeeSalaries() {
+  var query = "SELECT CONCAT(employee.first_name, ' ' ,employee.last_name)employee, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee m ON m.id = employee.manager_id;";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    console.log("**************************************************************************************************");
+    console.table(results);
+    start();
+  });
+};
+
+function viewDepartmentalBudget() {
+  var query = "SELECT * FROM department";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    console.log("");
+    console.table(results);
+    console.log("");
+    console.log("");
+    inquirer.prompt([
+      {
+        name: "dept_id",
+        type: "rawlist",
+        choices: () => {
+          var idArray = [];
+          for (var i = 0; i < results.length; i++) {
+            idArray.push(results[i].id);
+          };
+          return idArray;
+        },
+        message: "Choose the ID of the department whose total utilized budget you would like to view. (The chart above is provided for reference.)",
+      }
+    ]).then(department_choice => {
+      connection.query("SELECT SUM(salary) FROM role WHERE ?",
+      {
+        department_id: department_choice.dept_id
+      },
+        function(err, results) {
+            if (err) throw err;
+            console.log("");
+            console.log("The total utilized budget (in US$) for the chosen department is as follows:")
+            console.table(results);
+            console.log("");
+            start();
+        }
+    )})
+})};
