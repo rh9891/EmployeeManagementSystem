@@ -51,7 +51,7 @@ function start() {
             "View all employees by manager",
             "View all departments",
             "View all employee roles",
-            // "View all employee salaries",
+            "View all employee salaries",
             "Add employee",
             "Delete employee",
             "Add employee role",
@@ -85,9 +85,9 @@ function start() {
             viewAllEmployeeRoles()
             break;
 
-            // case "View all employee salaries":
-            // viewAllEmployeeSalaries();
-            // break;
+            case "View all employee salaries":
+            viewAllEmployeeSalaries();
+            break;
 
             case "Add employee":
             addEmployee();
@@ -443,3 +443,14 @@ function deleteEmployee() {
         }
     )})
 })};
+
+
+function viewAllEmployeeSalaries() {
+  var query = "SELECT CONCAT(employee.first_name, ' ' ,employee.last_name)employee, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id LEFT JOIN employee m ON m.id = employee.manager_id;";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    console.log("**************************************************************************************************");
+    console.table(results);
+    start();
+  });
+};
