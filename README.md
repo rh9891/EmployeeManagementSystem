@@ -18,7 +18,7 @@
 
 **C**ontent **M**anagement **S**ystems are user-friendly interfaces that make it easy for non-developers to view and interact with information stored in databases. Content Management Systems lets its users create, edit, and publish information in a dynamic fashion. It allows users without any coding knowledge or coding experience to modify and edit content.
 
-The Employee Management System is a command-line application builds a solution for managing a company's employees using node, inquirer, and MySQL. The user us able  lets its users create, edit, archive, collaborate, report, publish, distribute and inform. Its Graphic User Interface (GUI) makes interacting with a website's database user friendly.
+The Employee Management System is a command-line application that builds a solution for managing a company's employees using node, inquirer, and MySQL. The application functions so that its users can create, edit, and organize their company's information.
 
 ## User Story
 ~~~
@@ -38,17 +38,17 @@ THEN I am given options to view my employees (and details regarding their employ
 
 ![Title Card Preview](assets/images/titleCardPreview.png)
 
-The following animation demonstrates the application functionality:
+The following animation demonstrates the complete application functionality:
 
-![Employee Management System](https://github.com/rh9891/EmployeeManagementSystem/blob/master/assets/images/employmentManagementPreview.gif)
+![Employee Management System](https://github.com/rh9891/EmployeeManagementSystem/blob/master/assets/images/applicationFunctionalityPreview.gif)
 
-The following image demonstrates the application's capability to view all of its current employees and details regarding their employment:
+The following animation provides a closer look of the application's menu:
+
+![Main Menu Functionality](https://github.com/rh9891/EmployeeManagementSystem/blob/master/assets/images/mainMenuFunctionality.gif)
+
+The following image demonstrates the application's capability of viewing all of its current employees and details regarding their employment:
 
 ![View All Employees Preview](assets/images/viewAllEmployeesPreview.png)
-
-The following image is a diagram of the schema that demonstrates the variables for each table, including their indexes, constraints, and foreign keys:
-
-![Diagram of the company_db Schema](assets/images/diagramOfSchemaPreview.png)
 
 The following image demonstrates the application's capability to view all of its current employees by order of their managers:
 
@@ -58,15 +58,19 @@ The following image demonstrates the application's capability to view all of its
 
 ![View All Employees By Department Preview](assets/images/viewAllByDeptPreview.png)
 
-The following images demonstrate the application's capability of adding a new employee to the current employee database.
+The following animations demonstrate the application's capability of adding a new employee to the current employee database and updating the manager for an employee. 
 
-In this first image, the user is prompted by the command line interface to input responses about the new employee, such as their first name, last name, job title, etc.:
+![Add New Employee Preview](https://github.com/rh9891/EmployeeManagementSystem/blob/master/assets/images/addEmployeeFunctionality.gif)
 
-![Add New Employee Preview](assets/images/addEmployeePreview.png)
+The user is prompted by the command line interface to input responses about the new employee, such as their first name, last name, and job title. The user saves the details of the new employee into the current employee database. The id number is automatically generated for the new employee, but the new employee is without a manager as it has yet to be assigned.
 
-The second image demonstrate the application saving the details of the new employee into the current employee database. The id number is automatically generated for the new employee, but the new employee is without a manager as it has yet to be assigned.:
+![Update Manager Preview](https://github.com/rh9891/EmployeeManagementSystem/blob/master/assets/images/updateManagerFunctionality.gif)
 
-![View New Employee Preview](assets/images/viewNewEmployeePreview.png)
+The user then updates the manager information for the employee - as it is currently "null" - so that it is accurate to their job title.
+
+The following image is a diagram of the schema that demonstrates the variables for each table, including their indexes, constraints, and foreign keys:
+
+![Diagram of the company_db Schema](assets/images/diagramOfSchemaPreview.png)
 
 ## Links
 

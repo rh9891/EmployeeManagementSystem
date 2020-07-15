@@ -284,7 +284,7 @@ function updateEmployeeRole() {
           };
           return employeeArray;
         },
-        message: "What is the last name of the employee whose role you would like to update? ",
+        message: "What is the last name of the employee whose role you would like to update?",
       }
     ]).then(chosen_employee => {
       connection.query("SELECT * FROM role",
