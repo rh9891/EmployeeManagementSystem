@@ -59,9 +59,8 @@ function start() {
             "Delete employee role",
             "Add department",
             "Delete department",
-            // "Update employee name",
             "Update employee role",
-            // "Update employee manager",
+            "Update employee manager",
             "Exit"
         ]
     }).then(function(answer) {
@@ -118,17 +117,13 @@ function start() {
             deleteDepartment();
             break;
 
-            // case "Update employee name":
-            // updateEmployee();
-            // break;
-
             case "Update employee role":
             updateEmployeeRole();
             break;
 
-            // case "Update employee manager":
-            // updateEmployeeManager();
-            // break;
+            case "Update employee manager":
+            updateEmployeeManager();
+            break;
             
             case "Exit":
             connection.end();
@@ -506,3 +501,56 @@ function viewDepartmentalBudget() {
         }
     )})
 })};
+
+function updateEmployeeManager() {
+  var query = "SELECT id, last_name, first_name, manager_id FROM employee";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    inquirer.prompt([
+        {
+            name: "update_manager",
+            type: "rawlist",
+            message: "Which employee's manager would you like to update?",
+            choices: () => {
+                var employeeArray = [];
+                for(var i = 0; i < results.length; i++) {
+                  employeeArray.push({name:`${results[i].first_name} ${results[i].last_name}`, value: results[i].id})
+                }
+                return employeeArray;
+            }
+        }
+    ]).then(chosen_employee => {
+        inquirer.prompt([
+            {
+              name: "new_manager",
+              type: "rawlist",
+              message: "Please choose the new manager.",
+              choices: () => {
+                  let managerArray =[];
+                  for(var i = 0; i < results.length; i++) {
+                    managerArray.push({name:`${results[i].first_name} ${results[i].last_name}`, value: results[i].id})
+                  }
+                  return managerArray;
+              }
+            }
+        ]).then(chosen_manager => {
+            connection.query("UPDATE employee SET ? WHERE ?",
+            [ 
+              {
+                manager_id: chosen_manager.new_manager
+              },
+              {
+                id: chosen_employee.update_manager
+              }
+            ],
+            function(err, results) {
+              if (err) throw err;
+              console.log("");
+              console.log("You have successfully updated the employee's manager.");
+              console.log("");
+              start();
+              })
+          })
+      })
+  })
+};
