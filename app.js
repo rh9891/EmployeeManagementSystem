@@ -50,11 +50,12 @@ function start() {
             "View all employees by department",
             "View all employees by manager",
             "View all departments",
+            "View all employee roles",
             // "View all employee salaries",
             "Add employee",
             // "Remove employee",
             "Add employee role",
-            // "Remove employee role",
+            "Delete employee role",
             "Add department",
             "Delete department",
             // "Update employee name",
@@ -80,6 +81,10 @@ function start() {
             viewAllDepartments();
             break;
 
+            case "View all employee roles":
+            viewAllEmployeeRoles()
+            break;
+
             // case "View all employee salaries":
             // viewAllEmployeeSalaries();
             // break;
@@ -96,9 +101,9 @@ function start() {
             addEmployeeRole();
             break;
 
-            // case "Remove employee role":
-            // removeEmployeeRole();
-            // break;
+            case "Delete employee role":
+            deleteEmployeeRole();
+            break;
 
             case "Add department":
             addDepartment();
@@ -359,6 +364,48 @@ function deleteDepartment() {
             if (err) throw err;
             console.log("");
             console.log("You have successfully deleted the department.");
+            console.log("");
+            start();
+        }
+    )})
+})};
+
+function viewAllEmployeeRoles() {
+  var query = "SELECT id, CONCAT(title)job_title FROM role";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    console.log("**************************************************************************************************");
+    console.table(results);
+    start();
+  });
+}
+
+function deleteEmployeeRole() {
+  var query = "SELECT * FROM role";
+  connection.query(query, function(err, results) {
+    if (err) throw err;
+    inquirer.prompt([
+      {
+        name: "role_name",
+        type: "rawlist",
+        choices: () => {
+          var roleArray = [];
+          for (var i = 0; i < results.length; i++) {
+            roleArray.push(results[i].title);
+          };
+          return roleArray;
+        },
+        message: "What is the job title that you would like to delete?",
+      }
+    ]).then(chosen_role => {
+      connection.query("DELETE FROM role WHERE ?",
+      {
+        title: chosen_role.role_name
+      },
+        function(err, results) {
+            if (err) throw err;
+            console.log("");
+            console.log("You have successfully deleted the employee role.");
             console.log("");
             start();
         }
