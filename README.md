@@ -42,6 +42,8 @@ The following animation demonstrates the complete application functionality:
 
 ![Employee Management System](https://github.com/rh9891/EmployeeManagementSystem/blob/master/assets/images/applicationFunctionalityPreview.gif)
 
+To download the video file of the complete application functionality - as it is too large of a file and cannot be viewed on Github - you may do so [here](https://github.com/rh9891/EmployeeManagementSystem/blob/master/assets/images/applicationFunctionalityPreview.mp4).
+
 The following animation provides a closer look of the application's menu:
 
 ![Main Menu Functionality](https://github.com/rh9891/EmployeeManagementSystem/blob/master/assets/images/mainMenuFunctionality.gif)
